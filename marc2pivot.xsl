@@ -2575,7 +2575,7 @@ Priorité 4 :
         <!--propriete date -->
         <xsl:choose>
             <xsl:when
-                test="substring(marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'd' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'e' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'f' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'h' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a']/marc:subfield[@code = 'a'], 9, 1) = 'i' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'j' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'k'">
+                test="substring(marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'd' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'e' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'f' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'h' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'i' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'j' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'k'">
                 <xsl:variable name="annee"
                     select="string(number(substring(marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 10, 4)))"/>
                 <xsl:if test="string-length($annee) = 4">
@@ -3300,6 +3300,7 @@ Priorité 4 :
                             </xsl:for-each>
                         </xsl:when>
                         <xsl:when test="self::node()[starts-with(@code, 'c')]">
+                            <!--self::node() correspond à zone 210 ou 214 :dont on prend le $c-->
                             <xsl:call-template name="role">
                                 <xsl:with-param name="codefct" select="'650'"/>
                             </xsl:call-template>
