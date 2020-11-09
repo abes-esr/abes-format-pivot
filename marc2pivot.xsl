@@ -741,12 +741,6 @@ Priorité 4 :
                         </xsl:choose>
                         <xsl:comment>---propriétés niveau Item ----</xsl:comment>
                         <xsl:for-each select="current-group()[@tag = '915']">
-                            <xsl:for-each
-                                select="marc:datafield[@tag = '856'][not(marc:subfield[@code = '5'])]">
-                                <propriete nom="URI">
-                                    <xsl:value-of select="."/>
-                                </propriete>
-                            </xsl:for-each>
                             <xsl:for-each select="marc:subfield[@code = 'a' and text() != '']">
                                 <propriete nom="INVENTAIRE">
                                     <xsl:value-of select="."/>
@@ -754,6 +748,13 @@ Priorité 4 :
                             </xsl:for-each>
                             <xsl:for-each select="marc:subfield[@code = 'b' and text() != '']">
                                 <propriete nom="CODE_BARRES">
+                                    <xsl:value-of select="."/>
+                                </propriete>
+                            </xsl:for-each>
+                        </xsl:for-each>
+                        <xsl:for-each select="current-group()[@tag = '856']">
+                            <xsl:for-each select="marc:subfield[@code = 'u' and text() != '']">
+                                <propriete nom="URI">
                                     <xsl:value-of select="."/>
                                 </propriete>
                             </xsl:for-each>
@@ -769,12 +770,12 @@ Priorité 4 :
                                     <xsl:value-of select="."/>
                                 </propriete>
                             </xsl:for-each>
-                        </xsl:for-each>
-                        <xsl:for-each select="marc:subfield[@code = 'p']">
-                            <xsl:comment>--- l'item est dans le pcp dans le cadre d'un pôle de conservation ou pôle associé ---</xsl:comment>
-                            <propriete nom="TYPE_POLE_PCP">
-                                <xsl:value-of select="."/>
-                            </propriete>
+                            <xsl:for-each select="marc:subfield[@code = 'p']">
+                                <xsl:comment>--- l'item est dans le pcp dans le cadre d'un pôle de conservation ou pôle associé ---</xsl:comment>
+                                <propriete nom="TYPE_POLE_PCP">
+                                    <xsl:value-of select="."/>
+                                </propriete>
+                            </xsl:for-each>
                         </xsl:for-each>
                         <xsl:call-template name="meta">
                             <xsl:with-param name="idSource" select="$PPN"/>
@@ -837,8 +838,16 @@ Priorité 4 :
                                         </xsl:variable>
                                         <xsl:variable name="position"
                                             select="count(preceding-sibling::marc:datafield[starts-with(@tag, '7')][marc:subfield[@code = '5'] = $key5 and not(marc:subfield[@code = '3'])]) + 1"/>
-                                        <xsl:variable name="idMention"
-                                            select="concat($racineId, '/m/contexte/', $position)"/>
+<!--                                        <xsl:variable name="idMention"
+                                            select="concat($racineId, '/m/contexte/', $position)"/>-->
+                                        <xsl:variable name="idMention">
+                                            <xsl:variable name="key5">
+                                                <xsl:value-of select="marc:subfield[@code = '5']"/>
+                                            </xsl:variable>
+                                            <xsl:variable name="position"
+                                                select="count(preceding-sibling::marc:datafield[starts-with(@tag, '7') and marc:subfield[@code = '5'] = $key5 and not(marc:subfield[@code = '3'])]) + 1"/>
+                                            <xsl:value-of select="concat($racineId, '/i/', substring-after(marc:subfield[@code = '5'], ':'), '/contexte/', $position)"/>
+                                        </xsl:variable>
                                         <!--<xsl:variable name="position" select="position()"/>
                                     <xsl:comment>valeur position : <xsl:value-of select="$position"/></xsl:comment>
                                     <xsl:comment>valeur idItem : <xsl:value-of select="$idItem"/></xsl:comment>-->
@@ -973,7 +982,8 @@ Priorité 4 :
                         <xsl:attribute name="id" select="concat($racineId, '/e/nomen/', position())"/>
                         <type lrm="NOMEN">NOMEN</type>
                         <type>TITRE</type>
-                        <propriete nom="TYPE_VALEUR">
+                        <propriete nom="TYPE_ACCES">ng</propriete>
+                        <propriete nom="VALEUR">
                             <xsl:value-of select="normalize-space(marc:subfield[@code = 'a'])"/>
                         </propriete>
                         <xsl:for-each select="marc:subfield[@code = 'z']">
@@ -1171,6 +1181,7 @@ Priorité 4 :
                         select="concat($racineId, '/w/nomen/identifiant/', position())"/>
                     <type lrm="NOMEN">NOMEN</type>
                     <type>ISSN-L</type>
+                    <propriete nom="TYPE_ACCES">paa</propriete>
                     <propriete nom="VALEUR">
                         <xsl:value-of select="normalize-space(text())"/>
                     </propriete>
@@ -2105,6 +2116,7 @@ Priorité 4 :
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:variable>
+                        <xsl:comment> valeur id entite nomen contrib : <xsl:value-of select="$id"/></xsl:comment>
                         <xsl:comment>---- Entite NOMEN MENTION CONTRIBUTION niveau Manifestion - Item---- </xsl:comment>
                         <Entite id="{$id}/contrib/nomen">
                             <xsl:call-template name="nomen">
@@ -2673,8 +2685,15 @@ Priorité 4 :
                 <xsl:when test="not(marc:subfield[@code = '3'])">
                     <xsl:variable name="position"
                         select="count(preceding-sibling::marc:datafield[starts-with(@tag, '7') and not(marc:subfield/@code = '5') and not(marc:subfield[@code = '3']) and marc:subfield[@code = 'a' and text() != '']] | preceding-sibling::marc:datafield[@tag = '210' or @tag = '219' or @tag = '214']/marc:subfield[@code = 'c' and text() != '']) + 1"/>
-                    <xsl:variable name="idMention"
-                        select="concat($racineId, '/m/contexte/', $position)"/>
+<!--                    <xsl:variable name="idMention"
+                        select="concat($racineId, '/m/contexte/', $position)"/>-->
+                    <xsl:variable name="idMention">
+                        <xsl:variable name="position"
+                            select="count(preceding-sibling::marc:datafield[starts-with(@tag, '7') and not(marc:subfield/@code = '5') and not(marc:subfield[@code = '3'])] | preceding-sibling::marc:datafield[(@tag = '210' or @tag = '219' or @tag = '214') and marc:subfield[@code = 'c'] != '']) + 1"/>
+                        <xsl:value-of
+                            select="concat($racineId, '/m/contexte/', $position)"/>
+                    </xsl:variable>
+                    <xsl:comment> valeur idMention relation : <xsl:value-of select="$idMention"/></xsl:comment>
                     <xsl:comment>---- mention contributeur niveau Manif ---- position : <xsl:value-of select="$position"/></xsl:comment>
                     <xsl:call-template name="contrib_relation">
                         <xsl:with-param name="mode" select="'relation_mention'"/>
@@ -3259,7 +3278,7 @@ Priorité 4 :
                 <type>COLLECTIVITE</type>
             </xsl:when>
             <xsl:when test="$typeVedette = '602'">
-                <type>PERSONNE</type>
+                <type>COLLECTIVITE</type>
             </xsl:when>
             <xsl:when test="$typeVedette = '604'">
                 <type>TITRE</type>
