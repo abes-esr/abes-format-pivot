@@ -45,7 +45,7 @@
             <xsl:comment>---relations niveau Oeuvre ----</xsl:comment>
             <!-- Nomen titre : provisoirement o nprend le titre de la manif, le 200$a -->
             <xsl:for-each
-                select="datafield[@tag = '241'][subfield[@code = 'a' or @code = 't' and text() != '']]">
+                select="datafield[@tag = '241' or @tag = '231'][subfield[@code = 'a' or @code = 't' and text() != '']]">
                 <relation>
                     <xsl:attribute name="xref" select="concat($racineId, '/w/nomen/', position())"/>
                     <type>A_POUR_NOMEN</type>
