@@ -113,10 +113,10 @@
                     <xsl:for-each select="abstract[text() != '']">
 
                         <propriete nom="RESUME">
-                            <xsl:if test="@xml:lang">
+                            <xsl:if test="@lang">
                                 <xsl:attribute name="lang">
                                     <xsl:call-template name="codeLangue">
-                                        <xsl:with-param name="code" select="@xml:lang[. != '']"/>
+                                        <xsl:with-param name="code" select="@lang[. != '']"/>
                                     </xsl:call-template>
                                 </xsl:attribute>
                             </xsl:if>
@@ -950,8 +950,7 @@
     </xsl:template>
     <xsl:template name="codeLangue">
         <xsl:param name="code"/>
-        <xsl:variable name="codemap"
-            >;fr=français;en=anglais;de=allemand;es=espagnol;it=italien;pt=portugais;nl=néerlandais;la=latin;el=grec;ru=russe;ca=catalan;</xsl:variable>
+        <xsl:variable name="codemap">;fr=français;en=anglais;de=allemand;es=espagnol;it=italien;pt=portugais;nl=néerlandais;la=latin;el=grec;ru=russe;ca=catalan;</xsl:variable>
         <xsl:choose>
             <xsl:when test="contains($codemap, concat(';', $code, '='))">
                 <xsl:value-of
