@@ -113,7 +113,7 @@
                     <xsl:for-each select="abstract[text() != '']">
 
                         <propriete nom="RESUME">
-                            <xsl:if test="@xml:lang[. != '']">
+                            <xsl:if test="@xml:lang">
                                 <xsl:attribute name="lang">
                                     <xsl:call-template name="codeLangue">
                                         <xsl:with-param name="code" select="@xml:lang[. != '']"/>
