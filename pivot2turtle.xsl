@@ -10,7 +10,9 @@
     <xsl:template match="Wemi">
         <xsl:variable name="sujet">
             <xsl:text>&lt;</xsl:text>
-            <xsl:value-of select="@id"/>
+            <xsl:call-template name="majPPNx">
+                <xsl:with-param name="uri" select="@id"/>
+            </xsl:call-template>
             <xsl:text>&gt;</xsl:text>
         </xsl:variable>
         <xsl:value-of select="$sujet"/>
@@ -22,29 +24,57 @@
     <xsl:template match="Entite">
         <xsl:variable name="sujet">
             <xsl:text>&lt;</xsl:text>
-            <xsl:value-of select="@id"/>
+            <xsl:call-template name="majPPNx">
+                <xsl:with-param name="uri" select="@id"/>
+            </xsl:call-template>
             <xsl:text>&gt;</xsl:text>
         </xsl:variable>
         <!-- sujet -->
         <xsl:value-of select="$sujet"/>
         <xsl:text>&#10;</xsl:text>
+        <!-- rdf:type -->
         <xsl:for-each select="type">
-            <!-- rdf:type -->
-            <xsl:if test="position()=1">
-            <xsl:text>&#x9;rdf:type </xsl:text>
-            </xsl:if>
-            <!-- classe -->
-            <xsl:value-of select="concat('abes:', replace(concat(substring(.,1,1),lower-case(substring(.,2))),' ','_'))"/>
-            <!-- type suivant, ou fin du triplet et saut de ligne -->
             <xsl:choose>
-                <xsl:when test="position() != last()">
-                    <xsl:text>, </xsl:text>
-                </xsl:when>
-                <xsl:when test="following-sibling::*">
-                    <xsl:text> ;&#10;</xsl:text>
-                </xsl:when>
+                <xsl:when test="text()='OEUVRE' and following-sibling::type[text(),'THESE']"/>
+                <xsl:when test="text()='THESE' and not(preceding-sibling::type[text()='OEUVRE'])"/>
                 <xsl:otherwise>
-                    <xsl:text>.&#10;</xsl:text>
+                    <xsl:choose>
+                        <xsl:when test="text()='MONOGRAPHIE' and following-sibling::type[text(),'THESE'] and preceding-sibling::type[text()='OEUVRE']">
+                            <xsl:text>&#x9;rdf:type </xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:if test="position()=1">
+                                <xsl:text>&#x9;rdf:type </xsl:text>
+                            </xsl:if>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <!-- classe -->
+                    <xsl:variable name="classe">
+                        <xsl:variable name="classePivot">
+                            <xsl:value-of select="concat('abes:', replace(concat(substring(.,1,1),lower-case(substring(.,2))),' ','_'))"/>
+                        </xsl:variable>
+                        <xsl:choose>
+                            <xsl:when test="contains($classePivot,'_')">
+                                <xsl:value-of select="substring-before($classePivot,'_')"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="$classePivot"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:variable>
+                    <xsl:value-of select="$classe"/>
+                    <!-- type suivant, ou fin du triplet et saut de ligne -->
+                    <xsl:choose>
+                        <xsl:when test="position() != last()">
+                            <xsl:text>, </xsl:text>
+                        </xsl:when>
+                        <xsl:when test="following-sibling::*">
+                            <xsl:text> ;&#10;</xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>.&#10;</xsl:text>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:for-each>
@@ -119,11 +149,11 @@
             </xsl:choose>
         </xsl:for-each-group>-->
         <!-- Ajout d'un type "LRM" sur la relation quand @lrm -->
-        <xsl:for-each select="type/@lrm">
+ <!--       <xsl:for-each select="type/@lrm">
             <xsl:text>&#x9;&lt;&lt; </xsl:text>
             <xsl:value-of select="concat($sujet,' rdf:type ','abes:', concat(substring(.,1,1),lower-case(substring(.,2))))"/>
             <xsl:text> &gt;&gt; rdf:type abes:LRM.&#10;</xsl:text>
-        </xsl:for-each>
+        </xsl:for-each>-->
     </xsl:template>
     <xsl:template name="propriete">
         <!-- prédicat -->
@@ -132,6 +162,12 @@
         <xsl:for-each select="current-group()[@nom=current-grouping-key()]">
             <xsl:variable name="objet">
                 <xsl:value-of select="normalize-space(concat('&quot;', replace(replace(replace(text(),'&#x98;',''),'&#x9c;',''),'&quot;','&amp;quot;'), '&quot;'))"/>
+                <xsl:for-each select="@lang">
+                    <xsl:text>@</xsl:text>
+                    <xsl:call-template name="codeLangue">
+                        <xsl:with-param name="code" select="normalize-space(.)"/>
+                    </xsl:call-template>
+                </xsl:for-each>
                 <xsl:choose>
                     <xsl:when test="position() != last()">
                         <xsl:text>, </xsl:text>
@@ -157,7 +193,12 @@
         <!-- objet -->
         <xsl:for-each select="current-group()[type=current-grouping-key()]/@xref">
             <xsl:variable name="objet">
-                <xsl:value-of select="concat('&lt;',., '&gt;')"/>
+                <xsl:text>&lt;</xsl:text>
+                <xsl:call-template name="majPPNx">
+                    <xsl:with-param name="uri" select="."/>
+                </xsl:call-template>
+                <xsl:text>&gt;</xsl:text>
+                <!--<xsl:value-of select="concat('&lt;',., '&gt;')"/>-->
             </xsl:variable>
                 <xsl:value-of select="$objet"/>
                     <xsl:choose>
@@ -188,8 +229,12 @@
         <xsl:for-each select="current-group()">
         <!-- objet : on prend la tête de vedette ; les subdivisions seront traitées comme spécifications de la relation (réification) -->
         <xsl:variable name="objet">
-            <xsl:value-of
-                select="concat('&lt;', Entite/relation/@xref, '&gt;')"/>
+            <xsl:text>&lt;</xsl:text>
+            <xsl:call-template name="majPPNx">
+                <xsl:with-param name="uri" select="Entite/relation/@xref"/>
+            </xsl:call-template>
+            <xsl:text>&gt;</xsl:text>
+           <!-- <xsl:value-of select="concat('&lt;', Entite/relation/@xref, '&gt;')"/>-->
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="$mode = 'relation'">
@@ -219,7 +264,12 @@
                             <!-- prédicat réification 1-->
                             <xsl:value-of select="concat('&#x9;&#x9;abes:', lower-case(current-grouping-key()), ' ')"/>
                             <!-- objet réification 1 -->
-                            <xsl:value-of select="concat(' &lt;', ./@xref, '&gt; ')"/>
+                            <xsl:text>&lt;</xsl:text>
+                            <xsl:call-template name="majPPNx">
+                                <xsl:with-param name="uri" select="./@xref"></xsl:with-param>
+                            </xsl:call-template>
+                            <xsl:text>&gt;</xsl:text>
+                            <!--<xsl:value-of select="concat(' &lt;', ./@xref, '&gt; ')"/>-->
                             <xsl:text> &gt;&gt;&#10;</xsl:text>
                             <xsl:for-each-group select="propriete" group-by="@nom">
                                 <xsl:call-template name="propriete2"/>
@@ -261,9 +311,12 @@
         <xsl:for-each select="current-group()">
         <!-- objet -->
         <xsl:variable name="objet">
-            <xsl:value-of
-                select="concat('&lt;', Entite/relation[type = 'A_POUR_MENTION_DE_CONTRIBUTEUR']/@xref, '&gt;')"
-            />
+            <xsl:text>&lt;</xsl:text>
+            <xsl:call-template name="majPPNx">
+                <xsl:with-param name="uri" select="Entite/relation[type = 'A_POUR_MENTION_DE_CONTRIBUTEUR']/@xref"/>
+            </xsl:call-template>
+            <xsl:text>&gt;</xsl:text>
+            <!--<xsl:value-of select="concat('&lt;', Entite/relation[type = 'A_POUR_MENTION_DE_CONTRIBUTEUR']/@xref, '&gt;')" />-->
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="$mode = 'relation'">
@@ -312,7 +365,12 @@
         </xsl:variable>
         <xsl:for-each select="current-group()">
             <xsl:variable name="objet">
-                <xsl:value-of select="concat('&lt;', @xref, '&gt;')"/>
+                <xsl:text>&lt;</xsl:text>
+                <xsl:call-template name="majPPNx">
+                    <xsl:with-param name="uri" select="@xref"/>
+                </xsl:call-template>
+                <xsl:text>&gt;</xsl:text>
+                <!--<xsl:value-of select="concat('&lt;', @xref, '&gt;')"/>-->
             </xsl:variable>
             <xsl:variable name="TripletReifie">
                 <xsl:text>&#x9;&lt;&lt; </xsl:text>
@@ -371,6 +429,33 @@
                 <xsl:text>.&#10;</xsl:text>
             </xsl:when>
             <xsl:otherwise> ;&#10;</xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <!-- mapping pour tag langue (résumés et keywords) -->
+    <xsl:template name="codeLangue">
+        <xsl:param name="code"/>
+        <xsl:variable name="codemap">;français=fr;fre=fr;anglais=en;eng=en;allemand=de;ger=de;espagnol=es;spa=es;italien=it;portugais=pt;néerlandais=nl;latin=la;grec=el;russe=ru;catalan=ca;</xsl:variable>
+        <xsl:choose>
+            <xsl:when test="contains($codemap, concat(';', $code, '='))">
+                <xsl:value-of
+                    select="substring-before(substring-after($codemap, concat(';', $code, '=')), ';')"
+                />
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>autre</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <!-- correction des uris avec des ppns x +=> X -->
+    <xsl:template name="majPPNx">
+    <xsl:param name="uri"/>
+        <xsl:choose>
+            <xsl:when test="matches($uri,'http://www.abes.fr/[0-9]{8}x.*')">
+                <xsl:value-of select="replace($uri,'x/','X/')"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$uri"/>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 </xsl:stylesheet>
