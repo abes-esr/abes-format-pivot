@@ -2910,7 +2910,7 @@ Priorité 4 :
                             <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                             <lien>410</lien>
                             <xsl:call-template name="zones4XX">
-                                <xsl:with-param name="typePub" select="$typePub"/>
+                                <xsl:with-param name="typePub" select="PUBSERIE"/>
                             </xsl:call-template>
                             <xsl:call-template name="meta">
                                 <xsl:with-param name="idSource" select="marc:subfield[@code = '0']"/>
@@ -2933,7 +2933,7 @@ Priorité 4 :
                             <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                             <lien>410</lien>
                             <xsl:call-template name="zones4XX">
-                                <xsl:with-param name="typePub" select="$typePub"/>
+                                <xsl:with-param name="typePub" select="PUBSERIE"/>
                             </xsl:call-template>
                             <xsl:call-template name="meta">
                                 <xsl:with-param name="citeDans" select="$PPN"/>
@@ -2960,8 +2960,16 @@ Priorité 4 :
                         <bidon>
                             <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                             <lien>461</lien>
+                            <xsl:variable name="typeBidon">
+                                <xsl:choose>
+                                    <xsl:when test="ancestor::marc:record/marc:datafield[@tag='225']">
+                                        <xsl:text>MONOGRAPHIE</xsl:text>
+                                    </xsl:when>
+                                    <xsl:otherwise/>
+                                </xsl:choose>
+                            </xsl:variable>
                             <xsl:call-template name="zones4XX">
-                                <xsl:with-param name="typePub" select="$typePub"/>
+                                <xsl:with-param name="typePub" select="$typeBidon"/>
                             </xsl:call-template>
                             <xsl:call-template name="meta">
                                 <xsl:with-param name="idSource" select="marc:subfield[@code = '0']"/>
@@ -2983,8 +2991,16 @@ Priorité 4 :
                         <bidon>
                             <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                             <lien>461</lien>
+                            <xsl:variable name="typeBidon">
+                                <xsl:choose>
+                                    <xsl:when test="ancestor::marc:record/marc:datafield[@tag='225']">
+                                        <xsl:text>MONOGRAPHIE</xsl:text>
+                                    </xsl:when>
+                                    <xsl:otherwise/>
+                                </xsl:choose>
+                            </xsl:variable>
                             <xsl:call-template name="zones4XX">
-                                <xsl:with-param name="typePub" select="$typePub"/>
+                                <xsl:with-param name="typePub" select="$typeBidon"/>
                             </xsl:call-template>
                             <xsl:call-template name="meta">
                                 <xsl:with-param name="citeDans" select="$PPN"/>
