@@ -74,8 +74,7 @@ Priorité 4 :
         <xsl:variable name="racineId">
             <xsl:choose>
                 <xsl:when test="$TR = 'true'">
-                    <xsl:value-of
-                        select="concat('http://www.abes.fr/', $ppnTR, '_', $PPN)"/>
+                    <xsl:value-of select="concat('http://www.abes.fr/', $ppnTR, '_', $PPN)"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="concat('http://www.abes.fr/', $PPN)"/>
@@ -266,13 +265,15 @@ Priorité 4 :
                                         select="concat('http://www.abes.fr/', marc:subfield[@code = '0'], '/w')"/>
                                     <type>A_POUR_SUITE</type>
                                     <xsl:call-template name="meta"/>
-                                    <bidon> <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
+                                    <bidon>
+                                        <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                                         <lien>430</lien>
                                         <xsl:call-template name="zones4XX">
-                                            <xsl:with-param name="typePub" select="$typePub" />
+                                            <xsl:with-param name="typePub" select="$typePub"/>
                                         </xsl:call-template>
                                         <xsl:call-template name="meta">
-                                            <xsl:with-param name="idSource" select="marc:subfield[@code= '0']"/>
+                                            <xsl:with-param name="idSource"
+                                                select="marc:subfield[@code = '0']"/>
                                             <xsl:with-param name="citeDans" select="$PPN"/>
                                         </xsl:call-template>
                                     </bidon>
@@ -280,13 +281,15 @@ Priorité 4 :
                             </xsl:when>
                             <xsl:when test="marc:subfield[@code = 't']">
                                 <relation>
-                                    <xsl:attribute name="xref" select="concat($racineId, '/w/430/',position())"/>
+                                    <xsl:attribute name="xref"
+                                        select="concat($racineId, '/w/430/', position())"/>
                                     <type>A_POUR_SUITE</type>
                                     <xsl:call-template name="meta"/>
-                                    <bidon> <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
+                                    <bidon>
+                                        <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                                         <lien>430</lien>
                                         <xsl:call-template name="zones4XX">
-                                            <xsl:with-param name="typePub" select="$typePub" />
+                                            <xsl:with-param name="typePub" select="$typePub"/>
                                         </xsl:call-template>
                                         <xsl:call-template name="meta">
                                             <xsl:with-param name="citeDans" select="$PPN"/>
@@ -305,13 +308,15 @@ Priorité 4 :
                                         select="concat('http://www.abes.fr/', marc:subfield[@code = '0'], '/w')"/>
                                     <type>EST_LA_SUITE_DE</type>
                                     <xsl:call-template name="meta"/>
-                                    <bidon> <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
+                                    <bidon>
+                                        <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                                         <lien>440</lien>
                                         <xsl:call-template name="zones4XX">
-                                            <xsl:with-param name="typePub" select="$typePub" />
+                                            <xsl:with-param name="typePub" select="$typePub"/>
                                         </xsl:call-template>
                                         <xsl:call-template name="meta">
-                                            <xsl:with-param name="idSource" select="marc:subfield[@code= '0']"/>
+                                            <xsl:with-param name="idSource"
+                                                select="marc:subfield[@code = '0']"/>
                                             <xsl:with-param name="citeDans" select="$PPN"/>
                                         </xsl:call-template>
                                     </bidon>
@@ -319,13 +324,15 @@ Priorité 4 :
                             </xsl:when>
                             <xsl:when test="marc:subfield[@code = 't']">
                                 <relation>
-                                    <xsl:attribute name="xref" select="concat($racineId, '/w/440/',position())"/>
+                                    <xsl:attribute name="xref"
+                                        select="concat($racineId, '/w/440/', position())"/>
                                     <type>EST_LA_SUITE_DE</type>
                                     <xsl:call-template name="meta"/>
-                                    <bidon> <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
+                                    <bidon>
+                                        <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                                         <lien>440</lien>
                                         <xsl:call-template name="zones4XX">
-                                            <xsl:with-param name="typePub" select="$typePub" />
+                                            <xsl:with-param name="typePub" select="$typePub"/>
                                         </xsl:call-template>
                                         <xsl:call-template name="meta">
                                             <xsl:with-param name="citeDans" select="$PPN"/>
@@ -336,7 +343,8 @@ Priorité 4 :
                         </xsl:choose>
                     </xsl:for-each>
                     <!-- RELATION Contributeurs (niveau oeuvre) -->
-                    <xsl:variable name="roles">010 - 070 - 257 - 340 - 395 - 440 - 651</xsl:variable>
+                    <xsl:variable name="roles">010 - 070 - 257 - 340 - 395 - 440 -
+                        651</xsl:variable>
                     <xsl:for-each
                         select="marc:datafield[starts-with(@tag, '7')][marc:subfield[@code = '3']][marc:subfield[@code = '4'][contains($roles, text())]][not(marc:subfield[@code = '5'])]">
                         <xsl:comment>---relation contributeur niveau Oeuvre ---</xsl:comment>
@@ -547,13 +555,15 @@ Priorité 4 :
                                     select="concat('http://www.abes.fr/', marc:subfield[@code = '0'], '/e')"/>
                                 <type>EST_TRADUIT_DE</type>
                                 <xsl:call-template name="meta"/>
-                                <bidon> <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
+                                <bidon>
+                                    <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                                     <lien>454</lien>
                                     <xsl:call-template name="zones4XX">
-                                            <xsl:with-param name="typePub" select="$typePub" />
-                                        </xsl:call-template>
+                                        <xsl:with-param name="typePub" select="$typePub"/>
+                                    </xsl:call-template>
                                     <xsl:call-template name="meta">
-                                        <xsl:with-param name="idSource" select="marc:subfield[@code= '0']"/>
+                                        <xsl:with-param name="idSource"
+                                            select="marc:subfield[@code = '0']"/>
                                         <xsl:with-param name="citeDans" select="$PPN"/>
                                     </xsl:call-template>
                                 </bidon>
@@ -561,14 +571,16 @@ Priorité 4 :
                         </xsl:when>
                         <xsl:when test="marc:subfield[@code = 't']">
                             <relation>
-                                <xsl:attribute name="xref" select="concat($racineId, '/e/454/',position())"/>
+                                <xsl:attribute name="xref"
+                                    select="concat($racineId, '/e/454/', position())"/>
                                 <type>EST_TRADUIT_DE</type>
                                 <xsl:call-template name="meta"/>
-                                <bidon> <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
+                                <bidon>
+                                    <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                                     <lien>454</lien>
                                     <xsl:call-template name="zones4XX">
-                                            <xsl:with-param name="typePub" select="$typePub" />
-                                        </xsl:call-template>
+                                        <xsl:with-param name="typePub" select="$typePub"/>
+                                    </xsl:call-template>
                                     <xsl:call-template name="meta">
                                         <xsl:with-param name="citeDans" select="$PPN"/>
                                     </xsl:call-template>
@@ -838,7 +850,7 @@ Priorité 4 :
                                         </xsl:variable>
                                         <xsl:variable name="position"
                                             select="count(preceding-sibling::marc:datafield[starts-with(@tag, '7')][marc:subfield[@code = '5'] = $key5 and not(marc:subfield[@code = '3'])]) + 1"/>
-<!--                                        <xsl:variable name="idMention"
+                                        <!--                                        <xsl:variable name="idMention"
                                             select="concat($racineId, '/m/contexte/', $position)"/>-->
                                         <xsl:variable name="idMention">
                                             <xsl:variable name="key5">
@@ -846,7 +858,9 @@ Priorité 4 :
                                             </xsl:variable>
                                             <xsl:variable name="position"
                                                 select="count(preceding-sibling::marc:datafield[starts-with(@tag, '7') and marc:subfield[@code = '5'] = $key5 and not(marc:subfield[@code = '3'])]) + 1"/>
-                                            <xsl:value-of select="concat($racineId, '/i/', substring-after(marc:subfield[@code = '5'], ':'), '/contexte/', $position)"/>
+                                            <xsl:value-of
+                                                select="concat($racineId, '/i/', substring-after(marc:subfield[@code = '5'], ':'), '/contexte/', $position)"
+                                            />
                                         </xsl:variable>
                                         <!--<xsl:variable name="position" select="position()"/>
                                     <xsl:comment>valeur position : <xsl:value-of select="$position"/></xsl:comment>
@@ -2491,7 +2505,7 @@ Priorité 4 :
                         <xsl:with-param name="PPN" select="$PPN"/>
                         <xsl:with-param name="numManif" select="$numManif"/>
                         <xsl:with-param name="racineId" select="$racineId"/>
-                        <xsl:with-param name="typeManif" select="$typeManif"/>                        
+                        <xsl:with-param name="typeManif" select="$typeManif"/>
                         <xsl:with-param name="nbManif" select="$nbManif"/>
                     </xsl:call-template>
                     <!-- gestion des propriété spécifiques -->
@@ -2560,7 +2574,7 @@ Priorité 4 :
         <!-- propriete numManif-->
         <propriete nom="NUM_MANIF">
             <!--<xsl:value-of select="concat($PPN, '_', $numManif)"/>  on réutilise cette propriété pour préciser si c'est une manifestation avec ou sans exemplaire + le nb de manifestations si plusieurs-->
-            <xsl:value-of select="concat($typeManif,' - ',$nbManif,' manif(s)')"/>
+            <xsl:value-of select="concat($typeManif, ' - ', $nbManif, ' manif(s)')"/>
         </propriete>
         <!--propriete identifiants issn -->
         <xsl:for-each select="marc:datafield[@tag = '011']/marc:subfield[@code = 'a']">
@@ -2587,7 +2601,7 @@ Priorité 4 :
         <!--propriete date -->
         <xsl:choose>
             <xsl:when
-                test="substring(marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'd' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'e' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'f' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'h' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'i' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'j' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'k'">
+                test="substring(marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'd' or substring(marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'e' or substring(marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'f' or substring(marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'h' or substring(marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'i' or substring(marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'j' or substring(marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'k'">
                 <xsl:variable name="annee"
                     select="string(number(substring(marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 10, 4)))"/>
                 <xsl:if test="string-length($annee) = 4">
@@ -2597,7 +2611,7 @@ Priorité 4 :
                 </xsl:if>
             </xsl:when>
             <xsl:when
-                test="substring(marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'a' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'b' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'c' or substring(parent::marc:record/marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'g'">
+                test="substring(marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'a' or substring(marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'b' or substring(marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'c' or substring(marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 9, 1) = 'g'">
                 <xsl:variable name="annee_debut"
                     select="string(number(substring(marc:datafield[@tag = '100']/marc:subfield[@code = 'a'], 10, 4)))"/>
                 <xsl:if test="string-length($annee_debut) = 4">
@@ -2685,13 +2699,12 @@ Priorité 4 :
                 <xsl:when test="not(marc:subfield[@code = '3'])">
                     <xsl:variable name="position"
                         select="count(preceding-sibling::marc:datafield[starts-with(@tag, '7') and not(marc:subfield/@code = '5') and not(marc:subfield[@code = '3']) and marc:subfield[@code = 'a' and text() != '']] | preceding-sibling::marc:datafield[@tag = '210' or @tag = '219' or @tag = '214']/marc:subfield[@code = 'c' and text() != '']) + 1"/>
-<!--                    <xsl:variable name="idMention"
+                    <!--                    <xsl:variable name="idMention"
                         select="concat($racineId, '/m/contexte/', $position)"/>-->
                     <xsl:variable name="idMention">
                         <xsl:variable name="position"
                             select="count(preceding-sibling::marc:datafield[starts-with(@tag, '7') and not(marc:subfield/@code = '5') and not(marc:subfield[@code = '3'])] | preceding-sibling::marc:datafield[(@tag = '210' or @tag = '219' or @tag = '214') and marc:subfield[@code = 'c'] != '']) + 1"/>
-                        <xsl:value-of
-                            select="concat($racineId, '/m/contexte/', $position)"/>
+                        <xsl:value-of select="concat($racineId, '/m/contexte/', $position)"/>
                     </xsl:variable>
                     <xsl:comment> valeur idMention relation : <xsl:value-of select="$idMention"/></xsl:comment>
                     <xsl:comment>---- mention contributeur niveau Manif ---- position : <xsl:value-of select="$position"/></xsl:comment>
@@ -2765,13 +2778,14 @@ Priorité 4 :
                             select="concat('http://www.abes.fr/', marc:subfield[@code = '0'], '/m')"/>
                         <type>A_POUR_AUTRE_EDITION_MEME_SUPPORT</type>
                         <xsl:call-template name="meta"/>
-                        <bidon> <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
+                        <bidon>
+                            <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                             <lien>451</lien>
                             <xsl:call-template name="zones4XX">
-                                            <xsl:with-param name="typePub" select="$typePub" />
-                                        </xsl:call-template>
+                                <xsl:with-param name="typePub" select="$typePub"/>
+                            </xsl:call-template>
                             <xsl:call-template name="meta">
-                                <xsl:with-param name="idSource" select="marc:subfield[@code= '0']"/>
+                                <xsl:with-param name="idSource" select="marc:subfield[@code = '0']"/>
                                 <xsl:with-param name="citeDans" select="$PPN"/>
                             </xsl:call-template>
                         </bidon>
@@ -2779,14 +2793,15 @@ Priorité 4 :
                 </xsl:when>
                 <xsl:when test="marc:subfield[@code = 't']">
                     <relation>
-                        <xsl:attribute name="xref" select="concat($racineId, '/m/451/',position())"/>
+                        <xsl:attribute name="xref" select="concat($racineId, '/m/451/', position())"/>
                         <type>A_POUR_AUTRE_EDITION_MEME_SUPPORT</type>
                         <xsl:call-template name="meta"/>
-                        <bidon> <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
+                        <bidon>
+                            <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                             <lien>451</lien>
                             <xsl:call-template name="zones4XX">
-                                            <xsl:with-param name="typePub" select="$typePub" />
-                                        </xsl:call-template>
+                                <xsl:with-param name="typePub" select="$typePub"/>
+                            </xsl:call-template>
                             <xsl:call-template name="meta">
                                 <xsl:with-param name="citeDans" select="$PPN"/>
                             </xsl:call-template>
@@ -2804,13 +2819,14 @@ Priorité 4 :
                             select="concat('http://www.abes.fr/', marc:subfield[@code = '0'], '/m')"/>
                         <type>A_POUR_AUTRE_EDITION_SUPPORT_DIFFERENT</type>
                         <xsl:call-template name="meta"/>
-                        <bidon> <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
+                        <bidon>
+                            <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                             <lien>452</lien>
                             <xsl:call-template name="zones4XX">
-                                            <xsl:with-param name="typePub" select="$typePub" />
-                                        </xsl:call-template>
+                                <xsl:with-param name="typePub" select="$typePub"/>
+                            </xsl:call-template>
                             <xsl:call-template name="meta">
-                                <xsl:with-param name="idSource" select="marc:subfield[@code= '0']"/>
+                                <xsl:with-param name="idSource" select="marc:subfield[@code = '0']"/>
                                 <xsl:with-param name="citeDans" select="$PPN"/>
                             </xsl:call-template>
                         </bidon>
@@ -2818,14 +2834,15 @@ Priorité 4 :
                 </xsl:when>
                 <xsl:when test="marc:subfield[@code = 't']">
                     <relation>
-                        <xsl:attribute name="xref" select="concat($racineId, '/m/452/',position())"/>
+                        <xsl:attribute name="xref" select="concat($racineId, '/m/452/', position())"/>
                         <type>A_POUR_AUTRE_EDITION_SUPPORT_DIFFERENT</type>
                         <xsl:call-template name="meta"/>
-                        <bidon> <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
+                        <bidon>
+                            <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                             <lien>452</lien>
                             <xsl:call-template name="zones4XX">
-                                            <xsl:with-param name="typePub" select="$typePub" />
-                                        </xsl:call-template>
+                                <xsl:with-param name="typePub" select="$typePub"/>
+                            </xsl:call-template>
                             <xsl:call-template name="meta">
                                 <xsl:with-param name="citeDans" select="$PPN"/>
                             </xsl:call-template>
@@ -2843,13 +2860,14 @@ Priorité 4 :
                             select="concat('http://www.abes.fr/', marc:subfield[@code = '0'], '/m')"/>
                         <type>EST_UNE_REPRODUCTION_DE</type>
                         <xsl:call-template name="meta"/>
-                        <bidon> <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
+                        <bidon>
+                            <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                             <lien>455</lien>
                             <xsl:call-template name="zones4XX">
-                                            <xsl:with-param name="typePub" select="$typePub" />
-                                        </xsl:call-template>
+                                <xsl:with-param name="typePub" select="$typePub"/>
+                            </xsl:call-template>
                             <xsl:call-template name="meta">
-                                <xsl:with-param name="idSource" select="marc:subfield[@code= '0']"/>
+                                <xsl:with-param name="idSource" select="marc:subfield[@code = '0']"/>
                                 <xsl:with-param name="citeDans" select="$PPN"/>
                             </xsl:call-template>
                         </bidon>
@@ -2860,11 +2878,12 @@ Priorité 4 :
                         <xsl:attribute name="xref" select="concat($racineId, '/m/455/', position())"/>
                         <type>EST_UNE_REPRODUCTION_DE</type>
                         <xsl:call-template name="meta"/>
-                        <bidon> <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
+                        <bidon>
+                            <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                             <lien>455</lien>
                             <xsl:call-template name="zones4XX">
-                                            <xsl:with-param name="typePub" select="$typePub" />
-                                        </xsl:call-template>
+                                <xsl:with-param name="typePub" select="$typePub"/>
+                            </xsl:call-template>
                             <xsl:call-template name="meta">
                                 <xsl:with-param name="citeDans" select="$PPN"/>
                             </xsl:call-template>
@@ -2887,13 +2906,14 @@ Priorité 4 :
                                 <xsl:value-of select="."/>
                             </propriete>
                         </xsl:for-each>
-                        <bidon> <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
+                        <bidon>
+                            <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                             <lien>410</lien>
                             <xsl:call-template name="zones4XX">
-                                            <xsl:with-param name="typePub" select="$typePub" />
-                                        </xsl:call-template>
+                                <xsl:with-param name="typePub" select="$typePub"/>
+                            </xsl:call-template>
                             <xsl:call-template name="meta">
-                                <xsl:with-param name="idSource" select="marc:subfield[@code= '0']"/>
+                                <xsl:with-param name="idSource" select="marc:subfield[@code = '0']"/>
                                 <xsl:with-param name="citeDans" select="$PPN"/>
                             </xsl:call-template>
                         </bidon>
@@ -2901,7 +2921,7 @@ Priorité 4 :
                 </xsl:when>
                 <xsl:when test="marc:subfield[@code = 't']">
                     <relation>
-                        <xsl:attribute name="xref" select="concat($racineId, '/m/410/',position())"/>
+                        <xsl:attribute name="xref" select="concat($racineId, '/m/410/', position())"/>
                         <type>EST_AGREGE_DANS</type>
                         <xsl:call-template name="meta"/>
                         <xsl:for-each select="marc:subfield[@code = 'v' and text() != '']">
@@ -2909,11 +2929,12 @@ Priorité 4 :
                                 <xsl:value-of select="."/>
                             </propriete>
                         </xsl:for-each>
-                        <bidon> <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
+                        <bidon>
+                            <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                             <lien>410</lien>
                             <xsl:call-template name="zones4XX">
-                                            <xsl:with-param name="typePub" select="$typePub" />
-                                        </xsl:call-template>
+                                <xsl:with-param name="typePub" select="$typePub"/>
+                            </xsl:call-template>
                             <xsl:call-template name="meta">
                                 <xsl:with-param name="citeDans" select="$PPN"/>
                             </xsl:call-template>
@@ -2936,13 +2957,14 @@ Priorité 4 :
                                 <xsl:value-of select="."/>
                             </propriete>
                         </xsl:for-each>
-                        <bidon> <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
+                        <bidon>
+                            <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                             <lien>461</lien>
                             <xsl:call-template name="zones4XX">
-                                            <xsl:with-param name="typePub" select="$typePub" />
-                                        </xsl:call-template>
+                                <xsl:with-param name="typePub" select="$typePub"/>
+                            </xsl:call-template>
                             <xsl:call-template name="meta">
-                                <xsl:with-param name="idSource" select="marc:subfield[@code= '0']"/>
+                                <xsl:with-param name="idSource" select="marc:subfield[@code = '0']"/>
                                 <xsl:with-param name="citeDans" select="$PPN"/>
                             </xsl:call-template>
                         </bidon>
@@ -2950,7 +2972,7 @@ Priorité 4 :
                 </xsl:when>
                 <xsl:when test="marc:subfield[@code = 't']">
                     <relation>
-                        <xsl:attribute name="xref" select="concat($racineId, '/m/461/',position())"/>
+                        <xsl:attribute name="xref" select="concat($racineId, '/m/461/', position())"/>
                         <type>EST_AGREGE_DANS</type>
                         <xsl:call-template name="meta"/>
                         <xsl:for-each select="marc:subfield[@code = 'v' and text() != '']">
@@ -2958,11 +2980,12 @@ Priorité 4 :
                                 <xsl:value-of select="."/>
                             </propriete>
                         </xsl:for-each>
-                        <bidon> <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
+                        <bidon>
+                            <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                             <lien>461</lien>
                             <xsl:call-template name="zones4XX">
-                                            <xsl:with-param name="typePub" select="$typePub" />
-                                        </xsl:call-template>
+                                <xsl:with-param name="typePub" select="$typePub"/>
+                            </xsl:call-template>
                             <xsl:call-template name="meta">
                                 <xsl:with-param name="citeDans" select="$PPN"/>
                             </xsl:call-template>
@@ -2980,13 +3003,14 @@ Priorité 4 :
                             select="concat('http://www.abes.fr/', marc:subfield[@code = '0'], '/m')"/>
                         <type>AGREGE</type>
                         <xsl:call-template name="meta"/>
-                        <bidon> <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
+                        <bidon>
+                            <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                             <lien>464</lien>
                             <xsl:call-template name="zones4XX">
-                                            <xsl:with-param name="typePub" select="$typePub" />
-                                        </xsl:call-template>
+                                <xsl:with-param name="typePub" select="$typePub"/>
+                            </xsl:call-template>
                             <xsl:call-template name="meta">
-                                <xsl:with-param name="idSource" select="marc:subfield[@code= '0']"/>
+                                <xsl:with-param name="idSource" select="marc:subfield[@code = '0']"/>
                                 <xsl:with-param name="citeDans" select="$PPN"/>
                             </xsl:call-template>
                         </bidon>
@@ -2997,11 +3021,12 @@ Priorité 4 :
                         <xsl:attribute name="xref" select="concat($racineId, '/m/464/', position())"/>
                         <type>AGREGE</type>
                         <xsl:call-template name="meta"/>
-                        <bidon> <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
+                        <bidon>
+                            <!-- propriétés pour xsl "bidon" pour chargement dans Oracle -->
                             <lien>464</lien>
                             <xsl:call-template name="zones4XX">
-                                            <xsl:with-param name="typePub" select="$typePub" />
-                                        </xsl:call-template>
+                                <xsl:with-param name="typePub" select="$typePub"/>
+                            </xsl:call-template>
                             <xsl:call-template name="meta">
                                 <xsl:with-param name="citeDans" select="$PPN"/>
                             </xsl:call-template>
