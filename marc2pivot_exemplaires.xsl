@@ -743,7 +743,7 @@ Priorité 4 :
                         <xsl:for-each select="current-group()[@tag = '915']">
                             <xsl:for-each select="marc:subfield[@code = 'a' and text() != '']">
                                 <propriete nom="INVENTAIRE">
-                                    <xsl:value-of select="."/>
+                                    <xsl:value-of select="replace(text(),'x\','x')"/>
                                 </propriete>
                             </xsl:for-each>
                             <xsl:for-each select="marc:subfield[@code = 'b' and text() != '']">

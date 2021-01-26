@@ -35,8 +35,10 @@
         <!-- rdf:type -->
         <xsl:for-each select="type">
             <xsl:choose>
-                <xsl:when test="text()='OEUVRE' and following-sibling::type[text(),'THESE']"/>
-                <xsl:when test="text()='THESE' and not(preceding-sibling::type[text()='OEUVRE'])"/>
+                <xsl:when test="text()='OEUVRE' and following-sibling::type[text()='THESE']">
+                </xsl:when>
+                <xsl:when test="text()='THESE' and not(preceding-sibling::type[text()='OEUVRE'])">
+                </xsl:when>
                 <xsl:otherwise>
                     <xsl:choose>
                         <xsl:when test="text()='MONOGRAPHIE' and following-sibling::type[text(),'THESE'] and preceding-sibling::type[text()='OEUVRE']">
