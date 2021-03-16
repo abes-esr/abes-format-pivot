@@ -18,14 +18,13 @@ Cet XSL est le premier à avoir été écrit. Il a permis de développer les mé
 ## Adaptations du modèle TEF au tronc OEMI
 
 Les données sont, contrairement aux autres sources, complètement LRMisées : chaque fichier contient tout un ensemble OEMI : une oeuvre, une ou deux expressions au maximum (pour le TEF issu de STAR), appelées dans ce contexte “version complète” / “version incomplète”, et une ou plusieurs manifestations (ou “éditions”, en fonction des formats : ici seules les manifestations électroniques sont signalées. Et des fichiers correspondant aux items.
-
 Toutefois les items n’ont pas été convertis en format pivot.
-
 Toutes les entités ont un sous-type “Thèse”.
 
 _Structure FRBR de TEF_
 
 ![Structure FRBR de TEF](images/TEF2.png)
+
 Le nommage des entités a été construit sur le NNT (identifiant national de thèse), qui est propre à chaque oeuvre, et donc peut être décliné facilement pour toutes les entités OEMI.
 
 #### Expressions
