@@ -6,14 +6,14 @@
 
 Les fichiers KBART sont des fichiers tabulés qui répondent à une recommandation NISO (https://www.niso.org/standards-committees/kbart) et permettent d’échanger des métadonnées sur les contenus de bases de données entre les diffuseurs (plate-formes d’éditeurs ou agrégateurs), les bibliothèques et les fournisseurs de bases de connaissances. Les intitulés des 25 colonnes sont fixes mais certaines données sont optionnelles.
 
-Les fichiers KBART décrivent soit des ensembles de revues, soit des ensembles de livres électroniques. Les métadonnées sont fines sur les états de collection (possible de détailler jusqu’au numéro) et les types d’accès (payant, libre, plein-texte ou résumé). Le KBART est le seul format natif à ne pas utiliser les autorités. On ne récupère que des mentions de contributeurs (first_author , first_editor, publisher_name).
+Les fichiers KBART décrivent soit des ensembles de revues, soit des ensembles de livres électroniques. Les métadonnées sont fines sur les états de collection (possible de détailler jusqu’au numéro) et les types d'accès (payant, libre, plein-texte ou résumé). Le KBART est le seul format natif à ne pas utiliser les autorités. On ne récupère que des mentions de contributeurs (first_author , first_editor, publisher_name).
 
 
 ## Conversion et nommage
 
 Les fichiers initiaux en tabulé ont d’abord été convertis en XML au moyen d’OpenRefine. Chaque balise <ligne> englobe toutes les informations d’une ligne du tableau (comme la balise <wemi> englobe toutes les informations tirées d’une notice MARC.)
 
-A la racine, on va construire un ID du bouquet qui va être réutilisé pour forger les ID de toutes les entités du bouquet. Cet ID normalisé comme par la racine http://www.abes.fr/kbart/ suivi du nom du bouquet qui désigne le corpus en utilisant le nom de l’éditeur. On crée une entité de type ENSEMBLE et BOUQUET.
+A la racine, on va construire un ID du bouquet qui va être réutilisé pour forger les ID de toutes les entités du bouquet. Cet ID normalisé comme par la racine 'http://www.abes.fr/kbart/' suivi du nom du bouquet qui désigne le corpus en utilisant le nom de l’éditeur. On crée une entité de type ENSEMBLE et BOUQUET.
 
 L’exploitation d’une ontologie en RDF déclarant que Bouquet est une sous-classe de Ensemble peut permettre d’omettre le type Ensemble en sortie (dans un XSLT de chargement Pivot2RDF)
 
