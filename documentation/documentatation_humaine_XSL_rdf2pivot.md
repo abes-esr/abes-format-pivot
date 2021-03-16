@@ -4,9 +4,7 @@
 
 ## Le RDF produit à l’ABES
 
-Les données RDF produites à l’ABES concernent des métadonnées issues du projet ISTEX d’achat centralisé de lots de revues et livres électroniques, pour lesquelles on dispose des niveaux inférieurs habituellement non décrits dans le MARC mais présents sur les plateformes des éditeurs (articles, volumes, numéros ainsi que chapitres). Ces données résultent de conversion des fichiers XML reçus des éditeurs en un modèle homogène qui s’inspire du modèle FRBR et est de type entité/relation décrit ici :
-
-http://documentation.abes.fr/aidescienceplusabes/index.html#ModeleDonnees).
+Les données RDF produites à l’ABES concernent des métadonnées issues du projet ISTEX d’achat centralisé de lots de revues et livres électroniques, pour lesquelles on dispose des niveaux inférieurs habituellement non décrits dans le MARC mais présents sur les plateformes des éditeurs (articles, volumes, numéros ainsi que chapitres). Ces données résultent de conversion des fichiers XML reçus des éditeurs en un modèle homogène qui s’inspire du modèle FRBR et est de type entité/relation décrit ici : http://documentation.abes.fr/aidescienceplusabes/index.html#ModeleDonnees).
 
 
 ## Adaptations du modèle 
