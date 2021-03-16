@@ -39,7 +39,7 @@ Les expressions de thèses ont un sous type “Version complète” ou “Versio
 
 _Expression manquante_
 
-![Expression manquante](images/TEF4.png)
+![Expression manquante](images/TEF4.PNG)
 
 ## Contributions
 
