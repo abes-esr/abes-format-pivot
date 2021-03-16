@@ -22,13 +22,13 @@ On pourrait utiliser cette entité pour faire porter des informations de dates, 
 
 ## Une adaptation du tronc OEMI
 
-Chaque ligne a un identifiant constitué de l’ID bouquet auquel on rajoute une variable qu’on va chercher au sein de la ligne : online_identifier, ou si l’information fait défaut, dans print_identifier (l’ISSN ou l’ISBN). La colonne publication_type permet de renseigner la variable typeDoc (MONOGRAPHIE ou PUBSERIE).
+Chaque ligne a un identifiant constitué de l’ID bouquet auquel on rajoute une variable qu’on va chercher au sein de la ligne : *online_identifier*, ou si l’information fait défaut, dans *print_identifier* (l’ISSN ou l’ISBN). La colonne *publication_type* permet de renseigner la variable typeDoc (MONOGRAPHIE ou PUBSERIE).
 
 Chaque ligne donne lieu à la création d’une instance d’entité oeuvre, d’une ou deux manifestations et d’un item.
 
 On ne crée pas d’entité de type “expression” tel que IFLA-LRM le prévoit car on n’avait aucune information à faire porter par ce niveau (le KBART ne donne par exemple aucune information de langue). Par ailleurs, générer des troncs “O-M-I” et des relations A_POUR_MANIFESTATION_SS_E était un moyen de tester la coexistence des deux modèles dans un même système, puisque les informations issues des autres formats(MARC, TEF, RDF) donnent elles lieu à la création d’entités de type expressions.
 
-Une ligne peut donner lieu à la création de deux entités manifestations car on exploite le print_identifier qui décrit non pas la ressource qui fait partie du bouquet, mais qui décrit une relation entre la ressource et son équivalent sur un autre support.
+Une ligne peut donner lieu à la création de deux entités manifestations car on exploite le *print_identifier* qui décrit non pas la ressource qui fait partie du bouquet, mais qui décrit une relation entre la ressource et son équivalent sur un autre support.
 
 La manifestation électronique est liée à un et un seul Item qui porte les informations relatives à l’accès : d’état de collection, URL et type d’accès.
 
