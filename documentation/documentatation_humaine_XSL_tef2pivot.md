@@ -38,6 +38,7 @@ _Versions complète / incomplète_
 Les expressions de thèses ont un sous type “Version complète” ou “Version incomplète”. La “version incomplète” peut porter une information sur son “incomplétude” dans la propriété “RESSOURCE_MANQUANTE”.
 
 _Expression manquante_
+
 ![Expression manquante](images/TEF4.png)
 
 ## Contributions
