@@ -31,9 +31,9 @@ Transformations des contributions
 
 L’entité Authorship a été créée dans le RDF ABES pour faire porter les relations d’affiliations lorsqu’un auteur a écrit un article ou un chapitre en tant que membre affilié à une institution. Il s’agit d’une forme de réification. 
 
-L’XSLT rapatrie les informations portées par l’entité Authorship au niveau de l’entité Oeuvre qui va avoir de nouvelles relations. La relation A_POUR_CONTRIBUTEUR entre l’Oeuvre et l’Agent possède des propriétés (role, rang et rang par role) et une relation A_POUR_AFFILIATION. 
+L’XSLT rapatrie les informations portées par l’entité Authorship au niveau de l’entité Oeuvre qui va avoir de nouvelles relations. La relation A_POUR_CONTRIBUTEUR entre l’Oeuvre et l’Agent possède des propriétés (rôle, rang et rang par rôle) et une relation A_POUR_AFFILIATION. 
 
-_Modèle RDF ABES : _
+_Modèle RDF ABES :_
 
 ![Modèle RDF ABES](images/rdf2.png)
 
