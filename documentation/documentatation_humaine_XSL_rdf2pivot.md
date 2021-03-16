@@ -21,7 +21,7 @@ Les principales modifications pour passer du RDF “ABES” au RDF “sudoc21”
 
 ### Modification du tronc OEMI
 
-Les entités Expressions sont créées à partir des entités de type Oeuvre. L’ID d’une Expression est construit à partir de l’ID de l’Oeuvre en reprenant la racine commune : par exemple, si on a http://hub.abes.fr/brepols/ebook/101484mtemaeb5107186/**w** on va construire l’Expression http://hub.abes.fr/brepols/ebook/101484mtemaeb5107186/**e**  . L’Expression récupère deux propriétés de l’Oeuvre : la langue et la date de modification (qui correspondrait à une version révisée d’un article). 
+Les entités Expressions sont créées à partir des entités de type Oeuvre. L’ID d’une Expression est construit à partir de l’ID de l’Oeuvre en reprenant la racine commune : par exemple, si on a <http://hub.abes.fr/brepols/ebook/101484mtemaeb5107186/**w**> on va construire l’Expression <http://hub.abes.fr/brepols/ebook/101484mtemaeb5107186/**e**>  . L’Expression récupère deux propriétés de l’Oeuvre : la langue et la date de modification (qui correspondrait à une version révisée d’un article). 
 
 Les entités Items sont créées à partir des entités de type Manifestation. L’ID de la Item dérive de celui de la Manifestation de la même manière que décrit plus haut. L’Item récupère comme propriétés le DOI et/ou l’URI. 
 
@@ -35,8 +35,8 @@ L’XSLT rapatrie les informations portées par l’entité Authorship au niveau
 
 _Modèle RDF ABES : _
 
-![Modèle RDF ABES](images/rdf2.PNG)
+![Modèle RDF ABES](images/rdf2.png)
 
 _Modèle RDF SUDOC 21 PIVOT :_
 
-![Modèle RDF SUDOC 21 PIVOT](images/rdf1.PNG)
+![Modèle RDF SUDOC 21 PIVOT](images/rdf1.png)
