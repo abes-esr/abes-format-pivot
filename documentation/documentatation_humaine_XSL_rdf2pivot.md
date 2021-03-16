@@ -1,6 +1,6 @@
 
 # Documentation humaine de l’XSLT rdf2pivot
-
+https://github.com/abes-esr/abes-format-pivot/blob/main/rdf2pivot.xsl
 
 ## Le RDF produit à l’ABES
 
