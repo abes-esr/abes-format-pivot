@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation humaine : https://github.com/abes-esr/abes-format-pivot/blob/main/documentation/documentation_humaine_etatColl2pivot.md-->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mets="http://www.loc.gov/METS/"
     xmlns:xlink="http://www.w3.org/1999/xlink"
