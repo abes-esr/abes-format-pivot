@@ -4,13 +4,12 @@
 
 ## Création du tronc OEMI
 A partir de chaque notice MARC, on va créer à la racine du document XML pivot une enveloppe « WEMI » avec des variables globales qui vont nous servir tout au long du décorticage de la notice :
-
--          le type (électronique, imprimé ou autre)
--          le typePub (mono ou pub en série),
--          le typePubSerie (périodique ou collection)
--          la présence d’un lien à une notice Tr  (en B579$3) que nous considérons comme une « notice d’œuvre » 
--          le racineID, préfixe basé sur le PPN (de la Tr ou de la notice elle-même) qui va être décliné dans la construction des URI de toutes les entités créées.
--          nbManif qui calcule le nombre de manifestations identifiées au sein de la notice, à partir des ISBN et URL d’accès (B856) différentes mentionnées.
+- le type (électronique, imprimé ou autre)
+- le typePub (mono ou pub en série),
+- le typePubSerie (périodique ou collection)
+- la présence d’un lien à une notice Tr  (en B579$3) que nous considérons comme une « notice d’œuvre » 
+- le racineID, préfixe basé sur le PPN (de la Tr ou de la notice elle-même) qui va être décliné dans la construction des URI de toutes les entités créées.
+- nbManif qui calcule le nombre de manifestations identifiées au sein de la notice, à partir des ISBN et URL d’accès (B856) différentes mentionnées.
 
 **Si nbManif = 1**, alors la manifestation sera nommée PPN/m_1 et la ou les entités Item lui seront liées.
 
@@ -24,24 +23,22 @@ _Illustration d’un cas où dans la notice, on détecte plusieurs Manifestation
  
 Une fois que toutes les variables globales sont calculées, on commence à écrire.
 Pour que de l’information portée au niveau notice puisse être retrouvée, l’enveloppe « WEMI » a deux propriétés :
-
 - `ID_EXTERNE` qui contient tous les identifiants externes présents dans la notice (toutes les zones B035 concaténées)
 - `META_NBMANIF` qui reprend la valeur de la variable globale calculée plus haut.
 
 Ensuite, toutes les entités vont être créées sur un canevas générique avec
+- Un ID
+- Un ou plusieurs type(s), dont au moins un (et un seul) type LRM
+- Un bloc de métamétadonnées : `ID_SOURCE` (le PPN), `CITE_DANS` (lorsque l’ID n’est pas le PPN de la notice biblio – cf Exploitation des liens entre notices 4XX), `META_SOURCE` (le format de départ, ici MARC) et `META_ACTEUR` (XSLT-pivot)
 
--          Un ID
--          Un ou plusieurs type(s), dont au moins un (et un seul) type LRM
--          Un bloc de métamétadonnées : `ID_SOURCE` (le PPN), `CITE_DANS` (lorsque l’ID n’est pas le PPN de la notice biblio – cf Exploitation des liens entre notices 4XX), `META_SOURCE` (le format de départ, ici MARC) et `META_ACTEUR` (XSLT-pivot)
 Puis, des propriétés et des relations.
 
 La première entité créée est l’entité « Œuvre ».
 
 Les liens entre entités dans le pivot résultent :
-
--          soit de liens qui existaient déjà intégralement dans la notice MARC, vers des notices d’autorités qui utilisent des Idref comme identifiants.
--          soit de liens qui existaient déjà dans la notice MARC vers d’autres notices bibliographiques,
--          soit de liens que l’on crée au moment où l’on décompose les entités WEMI (par exemple, on crée à partir d’une notice unique au moins une œuvre, liée à une expression, liée à une manifestation, liée à un item).
+- soit de liens qui existaient déjà intégralement dans la notice MARC, vers des notices d’autorités qui utilisent des Idref comme identifiants.
+- soit de liens qui existaient déjà dans la notice MARC vers d’autres notices bibliographiques,
+- soit de liens que l’on crée au moment où l’on décompose les entités WEMI (par exemple, on crée à partir d’une notice unique au moins une œuvre, liée à une expression, liée à une manifestation, liée à un item).
  
 ![format pivot : des entités, des relations et des identifiants pour lier le tout](images/Marc2.png)
  
@@ -49,8 +46,8 @@ Une relation n’a de sens que lorsqu’on dit vers quoi elle pointe : le pivot 
 
 Chaque relation créée possède :
 
--          un type
--          des propriétés (dont toujours au moins le bloc de métamétadonnées : `META_SOURCE` (le format de départ, ici MARC) et `META_ACTEUR` (XSLT-pivot)
+- un type
+- des propriétés (dont toujours au moins le bloc de métamétadonnées : `META_SOURCE` (le format de départ, ici MARC) et `META_ACTEUR` (XSLT-pivot)
 
 Une fois que l’XSLT a terminé la création de l’entité « Œuvre », vont être créées toutes les entités liées pour lesquelles on a un embryon (l’ID). 
 
@@ -59,7 +56,6 @@ Les notices bibliographiques sont déjà liées entre elles au moyen des zones 4
 
 Selon la nature de l’information renseignée dans le lien 4XX, la relation peut être reportée au niveau Oeuvre, Expression ou Manifestation. La relation issue de 4XX est toujours au même niveau (d’une Oeuvre à une Oeuvre, d’une Expression à une Expression, d’une Manifestation à une Manifestation). 
  
-
 ## Cas particulier des propriétés sur les relations
 On a prévu que le pivot puisse s’adapter d’une part à un fonctionnement type property graph ou RDF\*, et d’autre part à un fonctionnement classique où c’est une entité intermédiaire qui va porter la propriété. Les deux cas où nous avons des propriétés qui portent sur des relations sont :
 
@@ -81,7 +77,5 @@ Dès l’abord d’une notice bibliographique, on a chargé une variable corresp
 
 S’il y a un lien, l’entité “Oeuvre” sera créée avec pour  `ID_SOURCE ` non pas le PPN qui est celui de la notice bibliographique traitée par l’XSLT, mais le PPN de la notice TR. Le PPN de la notice bibliographique sera mentionné dans la propriété  `CITE_DANS `.
 
-Un
-[Un XSLT différent](https://github.com/abes-esr/abes-format-pivot/blob/main/marc2pivot_TR.xsl) (marc2pivot_TR.xsl) va ensuite parser les informations des notices TR pour ajouter aux entités embryonnaires des propriétés (langue, résumé, indice Dewey, métadonnées de gestion) et des relations (aux entités de type Nomen,  Agent et Concept). 
+Un [XSLT différent](https://github.com/abes-esr/abes-format-pivot/blob/main/marc2pivot_TR.xsl) (marc2pivot_TR.xsl) va ensuite parser les informations des notices TR pour ajouter aux entités embryonnaires des propriétés (langue, résumé, indice Dewey, métadonnées de gestion) et des relations (aux entités de type Nomen,  Agent et Concept). 
 
-> 
