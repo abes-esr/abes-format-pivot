@@ -1,5 +1,6 @@
 
 # Documentation humaine de l'XSLT tef2pivot
+https://github.com/abes-esr/abes-format-pivot/blob/main/tef2pivot.xsl
 
 ## La recommandation TEF
 
