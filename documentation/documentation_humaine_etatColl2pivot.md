@@ -34,11 +34,11 @@ Un même Item peut présenter plusieurs séquences discontinues mais toujours da
 | PCP Philosophie Membre du plan de conservation - 751052131 | Collection sans information de lacunes | 1991 | 1991 |
 
 NB : La mention « collection lacunaire » dans Périscope est générée de 3 façons différentes :
-    - pour tout l’Item lorsque la notice MARC ne fournit pas le le détail des lacunes)
-    - sur des bouts de l’état de collection (séquences) lorsque les lacunes sont précisément et explicitement signalées dans la notice MARC
-    - par calcul de Périscope qui se base sur la structuration de l’état de collection lorsqu’il est détaillé par numéro au sein d’une année (ex : vol.1 n.1 (jan-1919) ; vol.1 n.3 (jul-1919))
 
-
+- pour tout l’Item lorsque la notice MARC ne fournit pas le le détail des lacunes)
+- sur des bouts de l’état de collection (séquences) lorsque les lacunes sont précisément et explicitement signalées dans la notice MARC
+- par calcul de Périscope qui se base sur la structuration de l’état de collection lorsqu’il est détaillé par numéro au sein d’une année (ex : vol.1 n.1 (jan-1919) ; vol.1 n.3 (jul-1919))
+ 
 ## Informations dans le fichier XML
 
 Puis, l’ensemble des fichiers .XLS a été rassemblé et converti en un fichier XML au moyen d’OpenRefine. Les informations récupérées en XML sont les suivantes : PPN, RCR, EPN, Etat (C pour Complet ou L pour Lacunaire), Année de début, Année de fin.
