@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Documentation humaine : https://github.com/abes-esr/abes-format-pivot/blob/main/documentation/documentatation_humaine_XSL_marc2pivot.md-->
+<!-- Documentation humaine : https://github.com/abes-esr/abes-format-pivot/blob/main/documentation/documentation_humaine_XSL_marc2pivot.md-->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0">
     <xsl:output encoding="UTF-8" method="xml" indent="yes"/>
