@@ -2,7 +2,7 @@
 # Documentation humaine de l'XSLT tef2pivot
 https://github.com/abes-esr/abes-format-pivot/blob/main/tef2pivot.xsl
 
-## La recommandation TEF
+## [La recommandation TEF](https://www.theses.fr/schemas/tef/recommandation/index.html)
 
 _"La recommandation TEF (Thèses Electroniques Françaises) définit un jeu de métadonnées pour les thèses électroniques soutenues en France. Son objectif est d'organiser de manière cohérente des métadonnées de thèse riches et normalisées, afin de faciliter leur échange et leur diffusion, au niveau national ou international. Ces métadonnées recouvrent des métadonnées descriptives (bibliographiques) et des métadonnées de gestion (administration, droits, conservation)._
 
