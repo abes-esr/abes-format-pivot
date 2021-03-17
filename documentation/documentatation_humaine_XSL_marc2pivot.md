@@ -45,7 +45,6 @@ Les liens entre entités dans le pivot résultent :
 Une relation n’a de sens que lorsqu’on dit vers quoi elle pointe : le pivot crée donc au moins un embryon d’entité pour que la relation puisse être exprimée entièrement. Si la relation pointe vers une autorité, on va utiliser l’URI IdRef pour la créer. S’il n’y a pas d’URI IdRef, cet embryon doit posséder au moins un identifiant, qu’on va construire sur la base du racineID (le PPN) auquel on rajoute des éléments basés sur des règles de nommage en fonction du type de la relation.
 
 Chaque relation créée possède :
-
 - un type
 - des propriétés (dont toujours au moins le bloc de métamétadonnées : `META_SOURCE` (le format de départ, ici MARC) et `META_ACTEUR` (XSLT-pivot)
 
@@ -58,10 +57,8 @@ Selon la nature de l’information renseignée dans le lien 4XX, la relation peu
  
 ## Cas particulier des propriétés sur les relations
 On a prévu que le pivot puisse s’adapter d’une part à un fonctionnement type property graph ou RDF\*, et d’autre part à un fonctionnement classique où c’est une entité intermédiaire qui va porter la propriété. Les deux cas où nous avons des propriétés qui portent sur des relations sont :
-
--          le rôle dans la relation de contribution : `A_POUR_MENTION`
--          l’indexation sujet construite (RAMEAU) :  `A_POUR_INDEXATION`
-
+- le rôle dans la relation de contribution : `A_POUR_MENTION`
+- l’indexation sujet construite (RAMEAU) :  `A_POUR_INDEXATION`
 
 On a dans le pivot ajouté un niveau en créant la réification. Dans les deux cas, l’entité intermédiaire est appelée « Contexte ».  
 Pour l’indexation sujet, l’entité « Contexte » est typée `BOITE_SUJETS`. Cette dernière a comme relation : `A_POUR_SUJET_PRINCIPAL`, `A_POUR_SPECIFICATION_SUJET`, `A_POUR_SPECIFICATION_LIEU`, `A_POUR_SPECIFICATION_TEMPS`.
@@ -69,7 +66,6 @@ Pour l’indexation sujet, l’entité « Contexte » est typée `BOITE_SUJETS`.
 Pour les relations de contributions, l’entité « Contexte » est typée `CONTRIBUTION`.  Cette dernière a comme relation `A_POUR_MENTION_DE_CONTRIBUTEUR` qui pointe vers une entité de type Nomen.
  
 Par ailleurs, pour les rôles et les affiliations ne sont pas traités de la même manière quand ils concernent des autorités (des entités Agent pour lesquelles on dispose d’une URI IdRef). Dans ce cas, le rôle est directement une propriété de la relation. Le pivot ne ménage donc pas dans ce cas de choix entre les deux fonctionnements. Il a fallu ainsi pour le POC2 recréer une entité intermédiaire dans l’XSL pivot2base.
-
 
 ## Exploitation des notices d’autorités de type TR
 
