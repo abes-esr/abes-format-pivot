@@ -1,8 +1,8 @@
 
 #  Documentation humaine de l’XSLT marc2pivot
  https://github.com/abes-esr/abes-format-pivot/blob/main/marc2pivot.xsl 
- et pour les exemplaires
- https://github.com/abes-esr/abes-format-pivot/blob/main/marc2pivot_exemplaires.xsl
+ 
+ et pour les exemplaires : https://github.com/abes-esr/abes-format-pivot/blob/main/marc2pivot_exemplaires.xsl
  
  
  **Tableau de correspondance : zones Unimarc retenues / format pivot** https://github.com/abes-esr/abes-format-pivot/blob/main/documentation/correspondance_zones_marc_retenues_pivot.md
