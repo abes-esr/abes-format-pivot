@@ -1,7 +1,7 @@
 
 
 # # Documentation humaine de l’XSLT marcEtatColl2pivot
-https://github.com/abes-esr/abes-format-pivot/blob/main/marcEtatColl2pivot.xsl
+https://github.com/abes-esr/abes-format-pivot/blob/main/etatColl2pivot.xsl
 
 ## Contexte Sudoc21 
 
