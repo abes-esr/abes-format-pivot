@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation humaine : https://github.com/abes-esr/abes-format-pivot/blob/main/documentation/documentation_humaine_XSL_marc2pivot.md-->
 <!-- to do au 13/01/20
     https://docs.google.com/spreadsheets/d/1QyUJcG-QmoZrJXBqZFi8T122jgKoISrNzjBm7tyV1jM/edit#gid=317192526
 Niveau ITEM
