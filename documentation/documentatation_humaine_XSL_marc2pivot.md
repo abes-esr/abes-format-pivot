@@ -40,7 +40,7 @@ Les liens entre entités dans le pivot résultent :
 - soit de liens qui existaient déjà dans la notice MARC vers d’autres notices bibliographiques,
 - soit de liens que l’on crée au moment où l’on décompose les entités WEMI (par exemple, on crée à partir d’une notice unique au moins une œuvre, liée à une expression, liée à une manifestation, liée à un item). 
 
-![format pivot : des entités, des relations et des identifiants pour lier le tout](images/Marc2.png)
+![format pivot : des entités, des relations et des identifiants pour lier le tout](images/Marc4.png)
 
  Une relation n’a de sens que lorsqu’on dit vers quoi elle pointe : le pivot crée donc au moins un embryon d’entité pour que la relation puisse être exprimée entièrement. Si la relation pointe vers une autorité, on va utiliser l’URI IdRef pour la créer. S’il n’y a pas d’URI IdRef, cet embryon doit posséder au moins un identifiant, qu’on va construire sur la base du racineID (le PPN) auquel on rajoute des éléments basés sur des règles de nommage en fonction du type de la relation.
 
