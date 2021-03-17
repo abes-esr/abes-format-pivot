@@ -1,6 +1,9 @@
 
 #  Documentation humaine de l’XSLT marc2pivot
  https://github.com/abes-esr/abes-format-pivot/blob/main/marc2pivot.xsl 
+ 
+ 
+ **Tableau de correspondance : zones Unimarc retenues / format pivot** https://github.com/abes-esr/abes-format-pivot/blob/main/documentation/correspondance_zones_marc_retenues_pivot.md
 
 ## Création du tronc OEMI
 A partir de chaque notice MARC, on va créer à la racine du document XML pivot une enveloppe « WEMI » avec des variables globales qui vont nous servir tout au long du décorticage de la notice :
