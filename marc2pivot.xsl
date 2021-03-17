@@ -22,7 +22,6 @@ Niveau BIBLIO
 Priorité 4 :
 - 102 $a : pays de parution (referentiel sur 2 cara)
 - 110 $a types de publication données codées (environ 10 codes)
-
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:marc="http://www.loc.gov/MARC21/slim"
